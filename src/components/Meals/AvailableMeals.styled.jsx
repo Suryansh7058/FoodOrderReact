@@ -12,3 +12,17 @@ export const AvailableMealsSection = styled.section`
     padding: 0;
   }
 `;
+
+export const MealsLoading = styled.section`
+  max-width: 60rem;
+  width: 90%;
+  margin: 2rem auto;
+  text-align: center;
+`;
+export const MealsError = styled.section`
+  max-width: 60rem;
+  width: 90%;
+  margin: 2rem auto;
+  text-align: center;
+  color: red;
+`;
