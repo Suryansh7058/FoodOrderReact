@@ -1,10 +1,13 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import Modal from '../UI/Modal';
 import { ButtonContainer, CartItems, Close, Order, Total } from './Cart.styled';
 import CartContext from '../../store/cart-context';
 import CartItem from './CartItem';
+import Checkout from './Checkout';
 
 const Cart = (props) => {
+  const [isCheckOut, setIsCheckOut] = useState(false);
+
   const cartCtx = useContext(CartContext);
 
   const totalAmount = `\u20B9${cartCtx.totalAmount}`;
@@ -34,10 +37,16 @@ const Cart = (props) => {
     </CartItems>
   );
   const closeCart = () => {
+    setIsCheckOut(false);
     props.hideCart();
   };
+  const hideCheckout = () => {
+    setIsCheckOut(false);
+  };
+  const orderClickHandler = () => {
+    setIsCheckOut(true);
+  };
 
-  //JSX
   return (
     <Modal onBackdropClick={props.hideCart}>
       <div className="cart-item__display">{cartItems}</div>
@@ -46,10 +55,14 @@ const Cart = (props) => {
         <span>Total Amount</span>
         <span>{totalAmount}</span>
       </Total>
-      <ButtonContainer>
-        <Close onClick={closeCart}>Close</Close>
-        {hasItems && <Order onClick={closeCart}>Order</Order>}
-      </ButtonContainer>
+      {isCheckOut && <Checkout onClose={hideCheckout} />}
+
+      {!isCheckOut && (
+        <ButtonContainer>
+          <Close onClick={closeCart}>Close</Close>
+          {hasItems && <Order onClick={orderClickHandler}>Order</Order>}
+        </ButtonContainer>
+      )}
     </Modal>
   );
 };

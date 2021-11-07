@@ -17,24 +17,26 @@ const SlideDown = keyframes`
 
 const Backdrop = styled.div`
   position: fixed;
-  inset: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
   z-index: 20;
   background-color: rgba(0, 0, 0, 0.75);
 `;
 const ModalCard = styled.div`
   position: fixed;
-  top: 20vh;
+  top: 10vh;
   left: 5%;
   width: 90%;
-  min-height: min-content;
   background-color: white;
   padding: 1rem;
   border-radius: 14px;
+  max-height: 70vh;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
   z-index: 30;
   animation: ${SlideDown} 300ms ease-out forwards;
-  overflow: auto;
-
+  overflow-y: scroll;
   @media (min-width: 768px) {
     width: 40rem;
     left: calc(50% - 20rem);
@@ -43,7 +45,6 @@ const ModalCard = styled.div`
   & .cart-item__display {
     max-height: 20rem;
     overflow-y: scroll;
-    /* overflow:auto does the same job */
   }
 `;
 
