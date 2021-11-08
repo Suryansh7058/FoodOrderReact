@@ -7,11 +7,9 @@ const validateText = (text) => {
 };
 
 const validatePostalCode = (postal) => {
-  if (!isNaN(postal)) {
+  if (!isNaN(postal) && postal.trim().length >= 6) {
     return true;
   }
-
-  return postal.trim().length >= 6;
 };
 const Checkout = (props) => {
   //*Name
@@ -62,6 +60,7 @@ const Checkout = (props) => {
 
   const formSubmitHandler = (event) => {
     event.preventDefault();
+    props.onConfirm({ name, street, postal, city });
     nameReset();
     streetReset();
     postalReset();

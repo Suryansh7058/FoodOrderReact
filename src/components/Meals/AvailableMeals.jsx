@@ -11,7 +11,7 @@ import axios from 'axios';
 const AvailableMeals = () => {
   const [meals, setMeals] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState();
 
   useEffect(() => {
     (async () => {
@@ -31,7 +31,7 @@ const AvailableMeals = () => {
         }
         setMeals(loadedMeals);
       } catch (error) {
-        setError(error.message);
+        setError('Meals Failed to Load!!!');
       }
       setIsLoading(false);
     })();
